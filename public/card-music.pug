@@ -1,0 +1,7 @@
+mixin new-card(img_src, name__music_card, name_singer, classes)
+    div(class="card-music card-music_background" + " " + classes)
+        img(src=img_src class="card-music__img")
+        span(class="card-music__playlist-name")=name__music_card
+        a(href="#" class="card-music__link")
+            span(class="card-music__playlist-singer")=name_singer 
+
