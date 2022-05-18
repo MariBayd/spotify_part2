@@ -1,0 +1,33 @@
+.playlists-manage_position {
+    padding: 2em 0;
+}
+
+.playlists-manage {
+    display: flex;
+    gap: 3em;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.playlists-manage__title {
+    font-size: large;
+    color: rgb(198, 198, 198);
+}
+
+.playlists-manage__label-text {
+    color: rgb(198, 198, 198);
+}
+
+.playlists-manage__item {
+    border: 15px solid rgb(22, 22, 22);
+    background-color: rgb(22, 22, 22);
+    border-radius: 30px;
+}
+
+.playlist-manage__input {
+    padding: 15px;
+    border-radius: 15px;
+    height: 2em;
+    width: 20em;
+    outline: none;
+}

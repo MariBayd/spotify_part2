@@ -1,0 +1,52 @@
+include nav.pug
+
+doctype html 
+html(lang="eng")
+    head 
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        meta(name="theme-color" content="#000000")
+        link(rel="stylesheet", href="style-basic.css")
+        link(rel="stylesheet", href="style-header.css")
+        link(rel="stylesheet", href="style-main.css")
+        link(rel="stylesheet", href="style-nav.css")
+        link(rel="stylesheet", href="style-content.css")
+        link(rel="stylesheet", href="card-music.css")
+        link(rel="stylesheet", href="search.css")
+        link(rel="stylesheet", href="playlists.css")
+    body.app
+        header.header
+            img(src="Spotify_logo_with_text.svg" class="logo logo_position")
+        main.main
+           +new-nav-media()
+
+           div(class="content" id="content")
+
+                div(class="content-item")
+                    div(class="content-item__header")
+                        div(class="content-item__title")
+                            span="Мои плейлисты"
+                
+                div(class="playlists-manage playlists-manage_position")
+                    span(class="playlists-manage__title")="Управление плейлистами:"
+
+                    div(class="del-playlist playlists-manage__item")
+                        label(for="del-playlist__input" class="playlists-manage__label-text")="Удалить"
+                        input(type="text" id="del-playlist__input" class="playlist-manage__input" value="Название плэйлиста") 
+
+                    div(class="add-playlist playlists-manage__item")
+                        label(for="add-playlist__input" class="playlists-manage__label-text")="Добавить"
+                        input(type="text" id="add-playlist__input" class="playlist-manage__input" value="Название плэйлиста")
+
+                    div(class="search-playlist playlists-manage__item")
+                        label(for="search-playlist__input" class="playlists-manage__label-text")="Найти"
+                        input(type="text" id="search-playlist__input" class="playlist-manage__input" value="Название плэйлиста")  
+
+                div(class="content-item__cards" id="my-playlists")
+
+            
+
+            
+    script(type="module" src="UIController.js" async)
+    script(type="module" src="APIController.js" async)
+    script(type="module" src="playlists.js" async)
