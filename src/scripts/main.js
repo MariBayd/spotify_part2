@@ -3,6 +3,8 @@ import { UIController } from './UIController.js';
 import {PlaylistResponse} from './PlaylistResponse.js'
 import { AlbumResponse } from './AlbumsResponse.js';
 
+(async function () {
+
 const apiController = new APIController();
 const uiController = new UIController();
 
@@ -22,3 +24,5 @@ const featuredPlaylists = uiController.createCardContainer('Популярные
 uiController.insertItemToHtml(featuredPlaylists, 'content');
 const playlists = new PlaylistResponse(feturePlaylistsJson, 10);
 uiController.insertItemsToHtml(playlists, 'popular-playlists');
+
+}());

@@ -1,3 +1,6 @@
+class Logger {
+
+}
 
 /** Сlass sends requests to the api spotify */
   export class APIController {
