@@ -4,20 +4,20 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="theme-color" content="#000000"/>
-    <link rel="stylesheet" href="style-basic.css"/>
-    <link rel="stylesheet" href="style-header.css"/>
-    <link rel="stylesheet" href="style-main.css"/>
-    <link rel="stylesheet" href="style-nav.css"/>
-    <link rel="stylesheet" href="style-content.css"/>
-    <link rel="stylesheet" href="card-music.css"/>
-    <link rel="stylesheet" href="search.css"/>
+    <link rel="stylesheet" href="./../src/style/style-basic.css"/>
+    <link rel="stylesheet" href="./../src/style/style-header.css"/>
+    <link rel="stylesheet" href="./../src/style/style-main.css"/>
+    <link rel="stylesheet" href="./../src/elements/nav/nav.css"/>
+    <link rel="stylesheet" href="./../src/style/style-content.css"/>
+    <link rel="stylesheet" href="./../src/elements/card-music/card-music.css"/>
+    <link rel="stylesheet" href="./../src/style/search.css"/>
   </head>
   <body class="app">
     <header class="header"><img class="logo logo_position" src="Spotify_logo_with_text.svg"/></header>
     <main class="main">
       <div class="nav-wrapper">
         <ul class="nav nav-size nav_background nav_position">
-          <li class="nav__item-position nav__item"><img class="nav__img" src="icon-home_stroke-grey.svg" alt="icon-home"/><a class="nav__link" href="index.html">Главная</a></li>
+          <li class="nav__item-position nav__item"><img class="nav__img" src="icon-home_stroke-grey.svg" alt="icon-home"/><a class="nav__link" href="main.html">Главная</a></li>
           <li class="nav__item-position nav__item"><img class="nav__img" src="icon-search-white.svg" alt="icon-search"/><a class="nav__link" href="search.html">Поиск</a></li>
           <!--li(class="nav__item-position nav__item")
           img(src="icon-library-music-grey.svg", alt="icon-search" class="nav__img") 
@@ -29,7 +29,7 @@
       <div class="content" id="content">
         <div class="search">
           <label class="search__label search__label_position" for="search">Что найти для вас?</label>
-          <input class="search__input search__input_position search__input_text-default" type="text" id="search__input" value="Исполнитель"/>
+          <input class="search__input search__input_position search__input_text-default" type="text" id="search__input" placeholder="Исполнитель"/>
         </div>
         <div class="search-results search-results_position" id="search-results">
           <div class="content-item"> 
@@ -42,7 +42,7 @@
       </div>
     </main>
   </body>
-  <script type="module" src="search.js" async="async"></script>
-  <script type="module" src="UIController.js" async="async"></script>
-  <script type="module" src="APIController.js" async="async"></script>
+  <script type="module" src="./../src/scripts/search.js" async="async"></script>
+  <script type="module" src="./../src/scripts/UIController.js" async="async"></script>
+  <script type="module" src="./../src/scripts/APIController.js" async="async"></script>
 </html>

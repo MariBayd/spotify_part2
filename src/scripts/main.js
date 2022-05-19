@@ -1,4 +1,4 @@
-import {APIController} from './APIController.js';
+import {APIController} from './APIController';
 import { UIController } from './UIController.js';
 import {PlaylistResponse} from './PlaylistResponse.js'
 import { AlbumResponse } from './AlbumsResponse.js';
