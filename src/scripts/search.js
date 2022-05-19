@@ -8,35 +8,22 @@ const token = await apiController._getToken();
 
 let inputSearch = document.querySelector('#search__input');
 
-inputSearch.addEventListener('click', ()=> {
-    if (inputSearch.value == 'Исполнитель') inputSearch.value = '';
-});
+inputSearch.addEventListener('change', onChange());
 
-inputSearch.addEventListener('change', ()=> {
-    if (inputSearch.value == '') {
-        inputSearch.value = 'Исполнитель';
-    }
-    else {
-            search(inputSearch.value);
-
-    }
-});
-
-async function search(query) {
-    const searchResults = await apiController._getArtistsBySearch(token, query);
+async function onChange() {
+    const searchResults = await apiController._getArtistsBySearch(token, inputSearch.value);
     if (searchResults.length != 0) {
         uiController.removeChildrenById('results'); 
         const artists = new ArtistResponse(searchResults, 20);
         uiController.insertItemsToHtml(artists,'results');
-    }
-    else {
+    } else {
         setNoResult();
     }
-  
 }
 
 function setNoResult(){
     uiController.removeChildrenById('results'); 
-    let NoResultText = `<span id="no-result-text">По вашему запросу ничего не найдено</span>`;
+    const NoResultText = `<span id="no-result-text">По вашему запросу ничего не найдено</span>`;
     uiController.insertItemToHtml(NoResultText, 'results');
 }
+

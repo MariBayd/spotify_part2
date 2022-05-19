@@ -1,6 +1,6 @@
-import { DataItem } from "./DataItem.js";
+import  BaseView  from "./BaseView.js";
 
-export class Artist extends DataItem {
+export class Artist extends BaseView {
     _name;
     _type = 'artist';
 
