@@ -15,7 +15,7 @@
  /** 
  * Get token
  */
-   _getToken = async () => {
+   getToken = async () => {
 
       const result = await fetch('https://accounts.spotify.com/api/token', {
           method: 'POST',
@@ -31,7 +31,7 @@
       return data.access_token;
   }
 
-  _refreshToken = async (token) => { 
+  refreshToken = async (token) => { 
     const result = await fetch('https://accounts.spotify.com/api/token', {
           method: 'POST',
           headers: {
@@ -50,7 +50,7 @@
  * @param {string} token - token 
  */
   
-   _getGenres = async (token) => {
+   getGenres = async (token) => {
 
     const result = await fetch('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
         method: 'GET',
@@ -68,7 +68,7 @@
  * @param {string} token - token 
  */
 
- _getNewReleases = async (token) => {
+ getNewReleases = async (token) => {
 
   const result = await fetch('https://api.spotify.com/v1/browse/new-releases', {
     method: 'GET',
@@ -88,7 +88,7 @@
  * @param {string} token - token 
  */
 
-  _getCurrentUsersPlaylists = async (token) => {
+  getCurrentUsersPlaylists = async (token) => {
     const result = await fetch('https://api.spotify.com/v1/me/playlists', {
       method: 'GET',
       headers: {
@@ -103,7 +103,7 @@
     return data;
   }
 
-  _getFeaturedPlaylist = async (token, country='') => {
+  getFeaturedPlaylist = async (token, country='') => {
     const result = await fetch('https://api.spotify.com/v1/browse/featured-playlists?' + 'country=' +country, {
       method: 'GET',
       headers: {
@@ -119,7 +119,7 @@
   }
 
 
-  _getTracksBySearch = async (token, query) => {
+  getTracksBySearch = async (token, query) => {
     const result = await fetch('https://api.spotify.com/v1/search?q=' + query + '&type=track', {
       method: 'GET',
       headers: {
@@ -140,7 +140,7 @@
  * @param {string} query - query 
  */
 
-  _getArtistsBySearch = async (token, query) => {
+  getArtistsBySearch = async (token, query) => {
     const result = await fetch('https://api.spotify.com/v1/search?q=' + query + '&type=artist', {
       method: 'GET',
       headers: {
