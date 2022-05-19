@@ -2,6 +2,7 @@ import {APIController} from './APIController.js';
 import { UIController } from './UIController.js';
 import {ArtistResponse} from './ArtistResponse.js';
 
+(async function() {
 const apiController = new APIController();
 const uiController = new UIController();
 const token = await apiController.getToken();
@@ -27,3 +28,4 @@ function setNoResult(){
     uiController.insertItemToHtml(NoResultText, 'results');
 }
 
+}());
