@@ -6,10 +6,10 @@ import { AlbumResponse } from './AlbumsResponse.js';
 const apiController = new APIController();
 const uiController = new UIController();
 
-const token = await apiController._getToken();
-const feturePlaylistsJson = await apiController._getFeaturedPlaylist(token, 'us');
-const newReleases = await apiController._getNewReleases(token);
-const artists = await apiController._getArtistsBySearch(token, 'sting');
+const token = await apiController.getToken();
+const feturePlaylistsJson = await apiController.getFeaturedPlaylist(token, 'us');
+const newReleases = await apiController.getNewReleases(token);
+const artists = await apiController.getArtistsBySearch(token, 'sting');
 console.log(artists);
 
 
