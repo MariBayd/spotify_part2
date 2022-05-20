@@ -1,28 +1,30 @@
-import {APIController} from './APIController';
+import {APIController} from './APIController.js';
 import { UIController } from './UIController.js';
-import {PlaylistResponse} from './PlaylistResponse.js'
-import { AlbumResponse } from './AlbumsResponse.js';
+import {Playlist} from './Playlist.js';
+import { Album } from './Album.js';
+
+
 
 (async function () {
 
-const apiController = new APIController();
+const apiController = new APIController()
 const uiController = new UIController();
 
+/** Get data */
 const token = await apiController.getToken();
 const feturePlaylistsJson = await apiController.getFeaturedPlaylist(token, 'us');
 const newReleases = await apiController.getNewReleases(token);
-const artists = await apiController.getArtistsBySearch(token, 'sting');
-console.log(artists);
 
+/** Create and insert new releases */
 
 const newReleasesContainer = uiController.createCardContainer('Популярные новые релизы', 'new-releases');
 uiController.insertItemToHtml(newReleasesContainer, 'content');
-const albums = new AlbumResponse(newReleases, 10);
+const albums = newReleases.map((item)=> new Album(item));
 uiController.insertItemsToHtml(albums, 'new-releases');
 
+/** Create and insert popular-playlist */
 const featuredPlaylists = uiController.createCardContainer('Популярные плэйлисты', 'popular-playlists');
 uiController.insertItemToHtml(featuredPlaylists, 'content');
-const playlists = new PlaylistResponse(feturePlaylistsJson, 10);
+const playlists = feturePlaylistsJson.map((item)=>new Playlist(item));
 uiController.insertItemsToHtml(playlists, 'popular-playlists');
-
 }());

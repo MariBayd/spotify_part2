@@ -1,5 +1,15 @@
+
+/** Class catch errors */
 class Logger {
 
+/** 
+ * Log error
+ * @param {string} message - error message
+ */
+    static log(message) {
+      alert('Ошибка! Проверьте подключение к интернету');
+      throw new Error(message);
+    }
 }
 
 /** Сlass sends requests to the api spotify */
@@ -7,32 +17,33 @@ class Logger {
   
    clientId = 'd0b55c9378d0473eb89d96c3b2e1a01c';
    clientSecret = '00f9a24f25254ee4a3313f66fdbb0968';
-  
-   handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
-    }
 
  /** 
  * Get token
  */
    getToken = async () => {
-
-      const result = await fetch('https://accounts.spotify.com/api/token', {
-          method: 'POST',
-          headers: {
-              'Content-Type' : 'application/x-www-form-urlencoded', 
-              'Authorization' : 'Basic ' + btoa((this.clientId + ':' + this.clientSecret).toString('base64')),
-          },
-          body:  'grant_type=client_credentials',
-      })
-      .catch(error => alert('Ошибка! Проверьте подключение к интернету'));
-
+    try{
+        const result = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/x-www-form-urlencoded', 
+            'Authorization' : 'Basic ' + btoa((this.clientId + ':' + this.clientSecret).toString('base64')),
+        },
+        body:  'grant_type=client_credentials',
+      });
       const data = await result.json();
       return data.access_token;
+    } 
+    catch(error) {
+      Logger.log(error);
+    }
+
   }
+
+  /** 
+ * Refresh token 
+ * @param {string} token - token 
+ */
 
   refreshToken = async (token) => { 
     const result = await fetch('https://accounts.spotify.com/api/token', {
@@ -49,7 +60,7 @@ class Logger {
   }
 
  /** 
- * Get genres
+ * Get recommended genres 
  * @param {string} token - token 
  */
   
@@ -58,32 +69,32 @@ class Logger {
     const result = await fetch('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
         method: 'GET',
         headers: { 'Authorization' : 'Bearer ' + token}
-    })
-    .then(this.handleErrors)
-    .catch(error => alert('Ошибка! Проверьте подключение к интернету'));
+    });
 
     const data = await result.json();
     return data.genres;
 }
 
 /** 
- * Get new releases, return 20 items.
+ * Get new releases
  * @param {string} token - token 
  */
 
- getNewReleases = async (token) => {
-
-  const result = await fetch('https://api.spotify.com/v1/browse/new-releases', {
+ getNewReleases = async (token, offset=20) => {
+  try {
+    const result = await fetch('https://api.spotify.com/v1/browse/new-releases?' + '&offset=' + offset, {
     method: 'GET',
     headers: {
       'Content-Type' : 'application/json',
       'Authorization' : 'Bearer ' + token,
     }
-  })
-  .then(this.handleErrors)
-  .catch(error => alert('Ошибка! Проверьте подключение к интернету'));
-  const data = await result.json();
-  return data.albums.items;
+  });
+    const data = await result.json();
+    return data.albums.items;
+  } catch {
+    Logger.log(error);
+  }
+  
   }
 
  /** 
@@ -92,80 +103,95 @@ class Logger {
  */
 
   getCurrentUsersPlaylists = async (token) => {
-    const result = await fetch('https://api.spotify.com/v1/me/playlists', {
+    try {
+      const result = await fetch('https://api.spotify.com/v1/me/playlists', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type' : 'application/json',
         'Authorization' : 'Bearer ' + token,
       }
-    })
-    .then(this.handleErrors)
-    .catch(error => alert('Ошибка! Проверьте подключение к интернету'));;
+    });
+
     const data = await result.json();
     return data;
-  }
-
-  getFeaturedPlaylist = async (token, country='') => {
-    const result = await fetch('https://api.spotify.com/v1/browse/featured-playlists?' + 'country=' +country, {
-      method: 'GET',
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type' : 'application/json',
-      'Authorization' : 'Bearer ' + token,
-      }
-    })
-    .then(this.handleErrors)
-    .catch(error => alert('Ошибка! Проверьте подключение к интернету'));
-    const data = await result.json();
-    return data.playlists.items;
-  }
-
-
-  getTracksBySearch = async (token, query) => {
-    const result = await fetch('https://api.spotify.com/v1/search?q=' + query + '&type=track', {
-      method: 'GET',
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type' : 'application/json',
-      'Authorization' : 'Bearer ' + token,
-      }
-    })
-    .then(this.handleErrors)
-    .catch(error => alert('Ошибка! Проверьте подключение к интернету'));
-    const data = await result.json();
-    return data;
+    } catch {
+      Logger.log(error);
+    }
+    
   }
 
 /** 
- * Get artists by search
+ * Get featured playlists by country
  * @param {string} token - token 
- * @param {string} query - query 
+ * @param {string} country - search country 
  */
 
-  getArtistsBySearch = async (token, query) => {
-    const result = await fetch('https://api.spotify.com/v1/search?q=' + query + '&type=artist', {
+  getFeaturedPlaylist = async (token, country='') => {
+    try {
+      const result = await fetch('https://api.spotify.com/v1/browse/featured-playlists?' + 'country=' +country, {
       method: 'GET',
       headers: {
       'Accept': 'application/json',
       'Content-Type' : 'application/json',
       'Authorization' : 'Bearer ' + token,
       }
-    })
-    .then(this.handleErrors)
-    .catch(error => alert('Ошибка! Проверьте подключение к интернету'));
+    });
+    const data = await result.json();
+    return data.playlists.items;
+    } catch {
+      Logger.log(error);
+    }
+    
+  }
+
+  /** 
+ * Get tracks by search query
+ * @param {string} token - token 
+ * @param {string} query - search query 
+ */
+
+  getTracksBySearch = async (token, query) => {
+    try {
+      const result = await fetch('https://api.spotify.com/v1/search?q=' + query + '&type=track', {
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + token,
+      }
+    });
+    const data = await result.json();
+    return data;
+    } catch {
+      Logger.log(error);
+    }
+    
+  }
+
+/** 
+ * Get artists by search query
+ * @param {string} token - token 
+ * @param {string} query - search query 
+ */
+
+  getArtistsBySearch = async (token, query, offset=0) => {
+    try {
+       const result = await fetch('https://api.spotify.com/v1/search?q=' + query + '&type=artist' + '&offset=' + offset, {
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + token,
+      }
+    });
     const data = await result.json();
 
     return data.artists.items;
+    } catch {
+      Logger.log(error);
+    }
+   
   }
 
 }
-
-//console.log( Buffer.from(clientId + ':' + clientSecret).toString('base64'));
-
-//console.log(encoder.encode((clientId + ':' + clientSecret).toString('base64') ));
-
-//const apiController = new APIController();
-//const token = await apiController._getToken();
-
-//console.log(await token);
