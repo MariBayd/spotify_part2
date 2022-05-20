@@ -1,25 +1,29 @@
 import  BaseView  from "./BaseView.js";
 
+/** Сlass Playlist */
 export class Playlist extends BaseView {
-    _title;
-    _description;
-    _type = 'playlist';
+    title;
+    description;
+    type = 'playlist';
 
     constructor(itemJson) {
-        super(itemJson.images[0].url, itemJson.id )
-        this._title = itemJson.name;
-        this._description = itemJson.description;
+        itemJson.images.length ? super(itemJson.images[0].url, itemJson.id) : super("artist.svg", itemJson.id); 
+        this.title = itemJson.name;
+        this.description = itemJson.description;
     }
 
+    /** 
+    * Get html for playlist
+    */
     getHtml() {
-        let  html = `
+        let html = `
         <div class="card-music card-music_background content-item_position">
-            <img class="card-music__img" src="${this._imgUrl}"/>
-            <span title="${this._title}" class="card-music__playlist-name">${this._title}</span>
+            <img class="card-music__img" src="${this.imgUrl}"/>
+            <span title="${this.title}" class="card-music__playlist-name">${this.title}</span>
             <a class="card-music__link" href="#">
-            <span class="card-music__playlist-singer">${this._description}</span></a>
+            <span class="card-music__playlist-singer">${this.description}</span></a>
         </div>`;
-    return html;
+        return html;
     }
 
 }

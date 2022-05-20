@@ -1,11 +1,13 @@
+/** Base class for Artist, Album, Playlist */
+
 export default class BaseView {
     imgUrl;
-    _id;
+    id;
     type;
 
     constructor(src, id) {
         this.imgUrl = src;
-        this._id = id;
+        this.id = id;
     }
 
 }
