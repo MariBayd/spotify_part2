@@ -1,16 +1,4 @@
-
-/** Class catch errors */
-class Logger {
-
-/** 
- * Log error
- * @param {string} message - error message
- */
-    static log(message) {
-      alert('Ошибка! Проверьте подключение к интернету');
-      throw new Error(message);
-    }
-}
+import Logger from "./Logger.js";
 
 /** Сlass sends requests to the api spotify */
   export class APIController {
@@ -35,7 +23,7 @@ class Logger {
       return data.access_token;
     } 
     catch(error) {
-      Logger.log(error);
+      Logger.logRequestError(error);
     }
 
   }
@@ -92,7 +80,7 @@ class Logger {
     const data = await result.json();
     return data.albums.items;
   } catch {
-    Logger.log(error);
+    Logger.logRequestError(error);
   }
   
   }
@@ -116,7 +104,7 @@ class Logger {
     const data = await result.json();
     return data;
     } catch {
-      Logger.log(error);
+      Logger.logRequestError(error);
     }
     
   }
@@ -140,7 +128,7 @@ class Logger {
     const data = await result.json();
     return data.playlists.items;
     } catch {
-      Logger.log(error);
+      Logger.logRequestError(error);
     }
     
   }
@@ -164,7 +152,7 @@ class Logger {
     const data = await result.json();
     return data;
     } catch {
-      Logger.log(error);
+      Logger.logRequestError(error);
     }
     
   }
@@ -189,7 +177,7 @@ class Logger {
 
     return data.artists.items;
     } catch {
-      Logger.log(error);
+      Logger.logRequestError(error);
     }
    
   }
