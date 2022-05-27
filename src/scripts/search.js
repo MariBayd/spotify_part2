@@ -1,11 +1,11 @@
 import {APIController} from './APIController.js';
 import { Artist } from './Artist.js';
-import BaseView from './BaseView.js';
+
 
 (async function() {
 
     /** Get data */ 
-    const apiController = new APIController();
+    const apiController = new APIController('d0b55c9378d0473eb89d96c3b2e1a01c', '00f9a24f25254ee4a3313f66fdbb0968');
     const token = await apiController.getToken();
 
     let inputSearch = document.querySelector('#search__input');
