@@ -1,4 +1,3 @@
-
 /** Class catch errors */
 export default class Logger {
 
