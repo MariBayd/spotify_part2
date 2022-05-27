@@ -3,7 +3,6 @@ import  BaseView  from './BaseView.js';
 /** Сlass Artist */
 export class Artist extends BaseView {
     name;
-    type = 'artist';
    
 
       constructor(itemJson, idParent) {

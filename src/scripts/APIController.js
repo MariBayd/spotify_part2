@@ -3,8 +3,14 @@ import Logger from './Logger.js';
 /** Сlass sends requests to the api spotify */
 export class APIController {
   
-  clientId = 'd0b55c9378d0473eb89d96c3b2e1a01c';
-  clientSecret = '00f9a24f25254ee4a3313f66fdbb0968';
+  _clientId;
+  _clientSecret;
+
+  constructor(clientId, clientSecret) {
+    this._clientId = clientId;
+    this._clientSecret = clientSecret;
+  }
+
   /** 
    * Get token
    */
@@ -14,7 +20,7 @@ export class APIController {
         method: 'POST',
         headers: {
           'Content-Type' : 'application/x-www-form-urlencoded', 
-          'Authorization' : 'Basic ' + btoa((this.clientId + ':' + this.clientSecret).toString('base64')),
+          'Authorization' : 'Basic ' + btoa((this._clientId + ':' + this._clientSecret).toString('base64')),
           },
         body:  'grant_type=client_credentials',
         });
@@ -23,7 +29,7 @@ export class APIController {
       return data.access_token;
       } 
       catch(error) {
-        Logger.logRequestError(error);
+        Logger.logError(error, true);
       }
 
     }
@@ -60,7 +66,7 @@ export class APIController {
       const data = await result.json();
       return data.albums.items;
       } catch {
-        Logger.logRequestError(error);
+        Logger.logError(error, true);
     }
     
     }
@@ -84,7 +90,7 @@ export class APIController {
       const data = await result.json();
       return data;
       } catch {
-        Logger.logRequestError(error);
+        Logger.logError(error, true);
       }
       
     }
@@ -108,7 +114,7 @@ export class APIController {
       const data = await result.json();
       return data.playlists.items;
       } catch {
-        Logger.logRequestError(error);
+        Logger.logError(error, true);
       }
       
     }
@@ -132,7 +138,7 @@ export class APIController {
       const data = await result.json();
       return data;
       } catch {
-        Logger.logRequestError(error);
+        Logger.logError(error, true);
       }
       
     }
@@ -157,7 +163,7 @@ export class APIController {
 
       return data.artists.items;
       } catch {
-        Logger.logRequestError(error);
+        Logger.logError(error, true);
       }
     
     }

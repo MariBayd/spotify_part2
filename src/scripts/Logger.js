@@ -3,18 +3,13 @@ export default class Logger {
 
     /** 
      * Log request error
-     * @param {string} message - error message
+     * @param {string} message - error message 
+     * @param {boolean} showAlert - show alert, if this parameter is true 
      */
-        static logRequestError(message) {
-          alert('Ошибка! Проверьте подключение к интернету');
-          throw new Error(message);
-        }
-    /** 
-     * Log error of create element
-     * @param {string} message - error message
-     */
-        static logCreateViewError(message) {
-          console.log(message);
+        static logError(message, showAlert=false) {
+          if (showAlert) alert('Ошибка! Проверьте подключение к интернету');
+          else console.log(message);
+
           throw new Error(message);
         }
     }

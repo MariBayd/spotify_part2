@@ -4,7 +4,6 @@ import  BaseView  from './BaseView.js';
 export class Playlist extends BaseView {
     title;
     description;
-    type = 'playlist';
 
     constructor(itemJson, idParent) {
         itemJson.images.length

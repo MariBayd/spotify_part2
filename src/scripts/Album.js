@@ -4,7 +4,6 @@ import BaseView from './BaseView.js';
 export class Album extends BaseView {
     title;
     artist;
-    type = 'album';
 
     constructor(itemJson, idParent) {
         itemJson.images.length
