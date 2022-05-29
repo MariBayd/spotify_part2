@@ -3,13 +3,13 @@ export default class Logger {
 
     /** 
      * Log request error
-     * @param {string} message - error message 
+     * @param {string} error - error message 
      * @param {boolean} showAlert - show alert, if this parameter is true 
+     * @param {string} alertMessage - alert message
      */
-        static logError(message, showAlert=false) {
-          if (showAlert) alert('Ошибка! Проверьте подключение к интернету');
-          else console.log(message);
-
-          throw new Error(message);
+        static logError(error, alertMessage='') {
+          if (alertMessage) alert(alertMessage);
+          
+          throw new Error(error);
         }
     }

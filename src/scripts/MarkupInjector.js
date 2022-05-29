@@ -8,7 +8,7 @@ export default class MarkupInjector {
      * @param {string} id - wrapper id. 
      * @param {string} idParent -  parent element id for wrapper. 
      */
-        static createWrapper(title, id, idParent) {
+        createWrapper(title, id, idParent) {
             const  html = `
             <div class="content-item">
                 <div class="content-item__header">
