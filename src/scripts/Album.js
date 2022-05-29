@@ -1,7 +1,7 @@
 import BaseView from './BaseView.js';
 
 /** Сlass Album */
-export class Album extends BaseView {
+export default class Album extends BaseView {
     title;
     artist;
 

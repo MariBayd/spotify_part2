@@ -1,26 +1,31 @@
-import {APIController} from './APIController.js';
-import { Artist } from './Artist.js';
+import APIController from './APIController.js';
+import Artist from './Artist.js';
 
 
 (async function() {
 
+    const clientId = 'd0b55c9378d0473eb89d96c3b2e1a01c';
+    const clientSecret = '00f9a24f25254ee4a3313f66fdbb0968';
+
     /** Get data */ 
-    const apiController = new APIController('d0b55c9378d0473eb89d96c3b2e1a01c', '00f9a24f25254ee4a3313f66fdbb0968');
+    const apiController = new APIController(clientId, clientSecret);
     const token = await apiController.getToken();
 
     let inputSearch = document.querySelector('#search__input');
-
-    inputSearch.addEventListener('change', onChange);
+   
+    const onChangeDebounce = debounce(onChange, 500); 
+    inputSearch.addEventListener('change', onChangeDebounce);
 
     /** 
      *  Search by query and insert search result in html
      */
     async function onChange() {
-        const searchResults = await apiController.getArtistsBySearch(token, inputSearch.value);
+        const searchResults = await apiController
+            .getData(apiController.urlSearch + inputSearch.value + '&type=artist', 0, token);
         
-        if (searchResults.length) {
+        if (searchResults.artists.items.length) {
             document.getElementById('results').innerHTML="";
-            searchResults.forEach(item => new Artist(item, 'results'));
+            searchResults.artists.items.forEach(item => new Artist(item, 'results'));
         } else {
             setNoResult();
         }
@@ -35,4 +40,17 @@ import { Artist } from './Artist.js';
         document.getElementById('results').insertAdjacentHTML('beforeend', noResultText);
     }
 
+    /** 
+     *  Limits the rate at which a function gets invoked
+     *  @param {string} func - function
+     *  @param {numb} timeout - delay value
+     */
+    function debounce(func, timeout = 300){
+        let timer;
+        return (...args) => {
+          clearTimeout(timer);
+          timer = setTimeout(() => { func.apply(this, args); }, timeout);
+        };
+      }
+        
 }());

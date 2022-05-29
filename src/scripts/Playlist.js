@@ -1,7 +1,7 @@
 import  BaseView  from './BaseView.js';
 
 /** Сlass Playlist */
-export class Playlist extends BaseView {
+export default class Playlist extends BaseView {
     title;
     description;
 

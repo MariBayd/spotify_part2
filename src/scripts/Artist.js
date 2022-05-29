@@ -1,7 +1,7 @@
 import  BaseView  from './BaseView.js';
 
 /** Сlass Artist */
-export class Artist extends BaseView {
+export default class Artist extends BaseView {
     name;
    
 
