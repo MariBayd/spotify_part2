@@ -1,5 +1,6 @@
 import APIController from './APIController.js';
 import Artist from './Artist.js';
+import {debounce} from './Helpers.js'
 
 
 (async function() {
@@ -40,18 +41,5 @@ import Artist from './Artist.js';
         const noResultText = `<span id="no-result-text">По вашему запросу ничего не найдено</span>`;
         document.getElementById('results').insertAdjacentHTML('beforeend', noResultText);
     }
-
-    /** 
-     *  Limits the rate at which a function gets invoked
-     *  @param {string} func - function
-     *  @param {numb} timeout - delay value
-     */
-    function debounce(func, timeout = 300){
-        let timer;
-        return (...args) => {
-          clearTimeout(timer);
-          timer = setTimeout(() => { func.apply(this, args); }, timeout);
-        };
-      }
         
 }());
