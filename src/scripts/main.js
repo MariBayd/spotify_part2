@@ -1,13 +1,12 @@
-import APIController from './APIController.js';
+import APIController from './ApiController/APIController.js';
 import Playlist from './Playlist.js';
 import Album from './Album.js';
 import MarkupInjector from './MarkupInjector.js';
+import {urlFeturedPlaylists, urlNewReleases, clientId, clientSecret} from './ApiController/constants.js'
 
 
 (async function () {
-    const clientId = 'd0b55c9378d0473eb89d96c3b2e1a01c';
-    const clientSecret = '00f9a24f25254ee4a3313f66fdbb0968';
-    
+
     const apiController = new APIController(clientId, clientSecret);
     const markupInjector = new MarkupInjector();
 
@@ -15,8 +14,8 @@ import MarkupInjector from './MarkupInjector.js';
     const token = await apiController.getToken();
     const [feturedPlaylists, newReleases] =
         await Promise.all([
-            apiController.getData(apiController.urlFeturedPlaylists, 0, token),
-            apiController.getData(apiController.urlNewReleases, 0, token)]);
+            apiController.getData(urlFeturedPlaylists, token),
+            apiController.getData(urlNewReleases, token)]);
     
     /* Create and insert new releases */
     markupInjector.createWrapper('Популярные новые релизы', 'new-releases','content');

@@ -17,10 +17,11 @@ export default class BaseView {
      * @param {string} idParent - parent id of the new element. 
      */
     _create(idParent) {
-        if ( !document.getElementById(idParent) ) {
+        const parentElem = document.getElementById(idParent);
+        if (!parentElem) {
             Logger.logError('Не найден родительский элемент');
         }
         
-        document.getElementById(idParent).insertAdjacentHTML('beforeend', this.html);        
+       parentElem.insertAdjacentHTML('beforeend', this.html);        
     }
 }

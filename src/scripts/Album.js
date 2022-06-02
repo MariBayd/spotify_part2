@@ -1,4 +1,5 @@
 import BaseView from './BaseView.js';
+import {defaultViewImg} from './Constans.js'
 
 /** Сlass Album */
 export default class Album extends BaseView {
@@ -8,7 +9,7 @@ export default class Album extends BaseView {
     constructor(itemJson, idParent) {
         itemJson.images.length
             ? super(itemJson.images[1].url, itemJson.id)
-            : super('artist.svg', itemJson.id); 
+            : super(defaultViewImg, itemJson.id); 
         
         this.title = itemJson.name;
         this.artist = itemJson.artists[0].name;
