@@ -1,4 +1,5 @@
 import  BaseView  from './BaseView.js';
+import {defaultViewImg} from './Constans.js'
 
 /** Сlass Playlist */
 export default class Playlist extends BaseView {
@@ -8,7 +9,7 @@ export default class Playlist extends BaseView {
     constructor(itemJson, idParent) {
         itemJson.images.length
         ? super(itemJson.images[0].url, itemJson.id)
-        : super('artist.svg', itemJson.id); 
+        : super(defaultViewImg, itemJson.id); 
 
         this.title = itemJson.name;
         this.description = itemJson.description;
@@ -23,5 +24,4 @@ export default class Playlist extends BaseView {
         
         this._create(idParent);
     }
-
 }
