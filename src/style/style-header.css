@@ -1,0 +1,12 @@
+.header {
+    background-color: black;
+}
+
+.logo {
+    width: 10%;
+    height: auto;
+}
+
+.logo_position {
+    margin: 1.5em;
+}

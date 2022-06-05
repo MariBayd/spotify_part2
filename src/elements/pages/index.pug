@@ -1,0 +1,27 @@
+include card-music.pug
+include nav.pug
+
+doctype html 
+html(lang="eng")
+    head 
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        meta(name="theme-color" content="#000000")
+        link(rel="stylesheet", href="style-basic.css")
+        link(rel="stylesheet", href="style-header.css")
+        link(rel="stylesheet", href="style-main.css")
+        link(rel="stylesheet", href="style-nav.css")
+        link(rel="stylesheet", href="style-content.css")
+        link(rel="stylesheet", href="card-music.css")
+    body.app
+        header.header
+            img(src="Spotify_logo_with_text.svg" class="logo logo_position")
+        main.main
+           +new-nav-main()
+           div(class="content" id="content")
+        footer  
+        script(type="module" src="UIController.js" async)
+        script(type="module" src="APIController.js" async)
+        script(type="module" src="main_page.js" async)
+ 
+        
