@@ -1,0 +1,39 @@
+
+.contentItem__cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
+
+.contentItemPosition {
+    margin: 2em 0.5em ;
+}
+
+.contentItem__title {
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+.contentItem__link {
+    color: rgb(179, 179, 179);
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.contentItem__link:hover {
+    text-decoration: underline;
+}
+
+.contentItem__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content {
+    background: linear-gradient( rgb(33, 33, 33), rgb(18, 18, 18));
+    padding: 1.4em;
+}
