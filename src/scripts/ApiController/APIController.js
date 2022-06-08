@@ -56,7 +56,7 @@ export default class APIController {
         });
       const data = await result.json();
       return data;
-      } catch {
+      } catch(error) {
         Logger.logError(error, true);
       }
   }
