@@ -15,7 +15,7 @@ import PostFilter from "../PostFilter"
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [debouncedFoo] = useDebouncedValue(searchQuery, 1100);
+  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 1100);
   const [isLoading, setIsLoading ] = useState("false");
   const [auth, setAuth] = useState({curClientId: clientId, curClientSecret:clientSecret});
   const [sort, setSort] = useState('popularity')
@@ -23,13 +23,15 @@ const Search = () => {
 
   const apiController = new APIController(auth.curClientId, auth.curClientSecret);
 
+/** Get data if debouncedSearchQuery change*/
   const search = useMemo( async () => {
     const token = await apiController.getToken();
     const response = await apiController.getData(urlSearch + searchQuery + "&type=artist", token);
     setIsLoading(false);
     setSearchResults(response.artists.items);
-  }, [debouncedFoo]);
+  }, [debouncedSearchQuery]);
 
+/** Set searchQuery when the input changes */
   const changeSearchQuery = (event) => {      
     setIsLoading(true);
     setSearchQuery(event.target.value);
