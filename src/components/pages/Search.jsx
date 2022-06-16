@@ -20,9 +20,11 @@ const Search = () => {
   const [auth, setAuth] = useState({curClientId: clientId, curClientSecret:clientSecret});
   const [sort, setSort] = useState('popularity')
   
+
   const sortedResults = useSortedPosts(searchResults, sort);
 
   const apiController = new APIController(auth.curClientId, auth.curClientSecret);
+
 
 /** Get data if debouncedSearchQuery change*/
 useEffect( () => {
@@ -42,6 +44,7 @@ useEffect( () => {
 /** Set searchQuery when the input changes */
   const changeSearchQuery = (event) => { 
     setIsLoading(true);     
+
     setSearchQuery(event.target.value);
   };
 
@@ -71,9 +74,10 @@ useEffect( () => {
             : <ContentList title="Результаты поиска:" posts={searchResults} />} 
 
           {
-            
+
 
           //<ContentList title="Отсортированные результаты поиска:" posts={sortedResults.searchResults}/>
+
           }
         </div>
       </div>

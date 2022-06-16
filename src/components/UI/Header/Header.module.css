@@ -1,0 +1,17 @@
+.header {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.logo {
+    width: 10%;
+    height: auto;
+}
+
+.logoPosition {
+    margin: 1.5em;
+}
+
+

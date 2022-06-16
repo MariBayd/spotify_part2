@@ -1,0 +1,27 @@
+.search {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.search__input {
+    width: 30em;
+    height: 3em;
+    border-radius: 2em;
+    color: #a7a7a7;
+    outline: none;
+}
+
+.search__input {
+    color: black;
+}
+
+.search__inputPosition {
+    padding: 15px;
+}
+
+
+.search-resultsPosition {
+    padding-top: 2em;
+    margin-top: 20px;
+}

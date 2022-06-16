@@ -2,11 +2,10 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
-import Main from "./Components_react/pages/Main.jsx";
-import Search from './Components_react/pages/Search.jsx'
+import Main from "./components/pages/Main.jsx";
+import Search from './components/pages/Search.jsx'
 
 
 function App() {
