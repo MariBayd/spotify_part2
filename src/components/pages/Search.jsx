@@ -25,7 +25,6 @@ const Search = () => {
 
   const apiController = new APIController(auth.curClientId, auth.curClientSecret);
 
-
 /** Get data if debouncedSearchQuery change*/
 useEffect( () => {
     async function fetchData() {
@@ -44,7 +43,6 @@ useEffect( () => {
 /** Set searchQuery when the input changes */
   const changeSearchQuery = (event) => { 
     setIsLoading(true);     
-
     setSearchQuery(event.target.value);
   };
 

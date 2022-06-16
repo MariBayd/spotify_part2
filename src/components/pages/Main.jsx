@@ -15,7 +15,8 @@ const Main = () => {
   const [auth, setAuth] = useState({curClientId: clientId, curClientSecret:clientSecret});
 
   const apiController = new APIController(auth.curClientId, auth.curClientSecret);
-  
+
+  /** Get data */
   const [fetchPosts, isPostsLoading, postError] = useFetching( async () => {
     const token = await apiController.getToken();
     const responseReleases = await apiController.getData(urlNewReleases, token);
