@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useDebouncedValue } from "rooks";
 import Header from "../UI/Header/Header";
 import Nav from "../UI/Nav/Nav.jsx";
@@ -15,25 +15,33 @@ import PostFilter from "../PostFilter"
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 1100);
+  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 1500);
   const [isLoading, setIsLoading ] = useState("false");
   const [auth, setAuth] = useState({curClientId: clientId, curClientSecret:clientSecret});
   const [sort, setSort] = useState('popularity')
+  
   const sortedResults = useSortedPosts(searchResults, sort);
 
   const apiController = new APIController(auth.curClientId, auth.curClientSecret);
 
 /** Get data if debouncedSearchQuery change*/
-  const search = useMemo( async () => {
-    const token = await apiController.getToken();
-    const response = await apiController.getData(urlSearch + searchQuery + "&type=artist", token);
-    setIsLoading(false);
+useEffect( () => {
+    async function fetchData() {
+       const token = await apiController.getToken();
+    const response = await apiController.getData(urlSearch + debouncedSearchQuery + "&type=artist", token);
+ 
     setSearchResults(response.artists.items);
+    }
+    if (debouncedSearchQuery) {
+      fetchData();
+    }
+    setIsLoading(false);
+    
   }, [debouncedSearchQuery]);
 
 /** Set searchQuery when the input changes */
-  const changeSearchQuery = (event) => {      
-    setIsLoading(true);
+  const changeSearchQuery = (event) => { 
+    setIsLoading(true);     
     setSearchQuery(event.target.value);
   };
 
@@ -63,7 +71,9 @@ const Search = () => {
             : <ContentList title="Результаты поиска:" posts={searchResults} />} 
 
           {
-            /* <ContentList title="Отсортированные езультаты поиска:" posts={sortedResults}/>*/
+            
+
+          //<ContentList title="Отсортированные результаты поиска:" posts={sortedResults.searchResults}/>
           }
         </div>
       </div>
