@@ -1,8 +1,7 @@
-import React, {useState} from "react";
-import MyInput from "./UI/Input/MyInput";
-import MyButton from "./UI/Button/MyButton.jsx";
-import MyLabel from "./UI/Label/MyLabel.jsx"
-
+import React, {useState} from 'react';
+import SpotifyInput from './UI/Input/SpotifyInput';
+import SpotifyButton from './UI/Button/SpotifyButton.jsx';
+import SpotifyLabel from './UI/Label/SpotifyLabel.jsx';
 
 const AuthForm = ({create}) => {
     const [auth, setAuth] = useState({curClientId: '', curClientSecret:''});
@@ -17,23 +16,23 @@ const AuthForm = ({create}) => {
     
     return (
         <form>
-            <p style={{fontSize:12, color:"grey", marginBottom:10}}>
+            <p style={{fontSize:12, color:'grey', marginBottom:10}}>
                 Будьте внимательны, при неверных client id и client secret приложение не будет работать.<br/>
                 В этом случае введите данные ещё раз или перезапустите приложение.
             </p>
-            <MyLabel>Client id</MyLabel>
-            <MyInput 
-                type="text"
-                placeholder="Ввести новый client id"
+            <SpotifyLabel>Client id</SpotifyLabel>
+            <SpotifyInput 
+                type='text'
+                placeholder='Ввести новый client id'
                 value={auth.curClientId}
                 onChange={e => setAuth({...auth, curClientId: e.target.value})}/>
-            <MyLabel>Client secret</MyLabel>
-            <MyInput
-                type="text"
-                placeholder="Ввести новый client secret"
+            <SpotifyLabel>Client secret</SpotifyLabel>
+            <SpotifyInput
+                type='text'
+                placeholder='Ввести новый client secret'
                 value={auth.curClientSecret}
                 onChange={e => setAuth({...auth, curClientSecret: e.target.value})}/>
-            <MyButton onClick={addNewAuth} >Отправить данные</MyButton>
+            <SpotifyButton onClick={addNewAuth} >Отправить данные</SpotifyButton>
         </form>
     )
 }

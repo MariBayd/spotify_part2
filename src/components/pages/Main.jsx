@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import "./App.css"
+import './App.css'
 import Header from '../UI/Header/Header.jsx';
 import {urlFeturedPlaylists, urlNewReleases, clientId, clientSecret} from '../../js/ApiController/constants.js'
 import APIController from '../../js/ApiController/APIController.js';
 import ContentList from '../ContentList';
 import {useFetching} from '../hooks/useFetching.js'
 import Nav from '../UI/Nav/Nav.jsx'
-
 
 const Main = () => {
 
@@ -19,8 +18,9 @@ const Main = () => {
   /** Get data */
   const [fetchPosts, isPostsLoading, postError] = useFetching( async () => {
     const token = await apiController.getToken();
-    const responseReleases = await apiController.getData(urlNewReleases, token);
-    const responseFeturedPlaylists = await apiController.getData(urlFeturedPlaylists, token);
+    const [responseReleases, responseFeturedPlaylists] = 
+      await Promise.all([apiController.getData(urlNewReleases, token),
+      apiController.getData(urlFeturedPlaylists, token)]);
     setNewReleases(responseReleases.albums.items); 
     setFeturedPlaylists(responseFeturedPlaylists.playlists.items);
   });
@@ -30,17 +30,17 @@ const Main = () => {
   }, [])
   
   return (
-    <div className="App">
+    <div className='App'>
       <Header setAuth={setAuth}/>
-      <div className="main">
+      <div className='main'>
 
         <Nav props={[
-          {title:"Главная", link:"/", imgSrc:"icon-home_fill-white.svg", alt:"icon-home"},
-          {title:"Поиск", link:"/search", imgSrc:"icon-search-grey.svg", alt:"icon-search"}]} />
+          {title:'Главная', link:'/', imgSrc:'icon-home_fill-white.svg', alt:'icon-home'},
+          {title:'Поиск', link:'/search', imgSrc:'icon-search-grey.svg', alt:'icon-search'}]} />
 
         <div className="content">
-          <ContentList posts={newReleases} title="Популярные новые релизы"  />
-          <ContentList posts={feturedPlaylists} title="Популярные плэйлисты"  />    
+          <ContentList posts={newReleases} title='Популярные новые релизы'  />
+          <ContentList posts={feturedPlaylists} title='Популярные плэйлисты'  />    
         </div>
 
       </div>

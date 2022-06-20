@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PostItem from './UI/PostItem/PostItem.jsx';
 import ContentWrapper from './UI/ContentWrapper/ContentWrapper.jsx'
 
@@ -11,7 +11,7 @@ const ContentList = ({posts, title}) => {
           <PostItem
             key={post.id}
             title={post.name}
-            artist={post.artists ? post.artists[0].name : "Исполнитель"}
+            artist={post.artists ? post.artists[0].name : 'Исполнитель'}
             imgUrl={post.images}
             popularity={post.popularity}
           />)

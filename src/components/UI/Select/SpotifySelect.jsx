@@ -1,7 +1,7 @@
-import React from "react";
-import classes from "./MySelect.module.css"
+import React from 'react';
+import classes from './SpotifySelect.module.css'
 
-const MySelect = ({options, defaultValue, value, onChange}) => {
+const SpotifySelect = ({options, defaultValue, value, onChange}) => {
     
     return (
         <select
@@ -9,7 +9,7 @@ const MySelect = ({options, defaultValue, value, onChange}) => {
             value={value}
             onChange={event => onChange(event.target.value)}>
 
-            <option  disabled value="">{defaultValue}</option>
+            <option  disabled value=''>{defaultValue}</option>
             {options?.map( (option) => 
                 <option key={option.value} value={option.value}>
                     {option.name}
@@ -19,5 +19,5 @@ const MySelect = ({options, defaultValue, value, onChange}) => {
     )
 }
 
-export default MySelect;
+export default SpotifySelect;
 

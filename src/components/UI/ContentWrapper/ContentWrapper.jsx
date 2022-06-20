@@ -1,5 +1,5 @@
-import React from "react";
-import classes from "./ContentWrapper.module.css"
+import React from 'react';
+import classes from './ContentWrapper.module.css';
 
 const ContentWrapper = ({title, children}) => {
     
