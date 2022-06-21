@@ -1,13 +1,15 @@
-import { useMemo } from 'react';
+import { useEffect} from 'react';
 
-export const useSortedPosts = (posts, sort) => {
-    const sortedPosts = useMemo(() => {
-        if (sort) {
-            posts = [...posts].sort((a, b) =>  a.title > b.title ? 1 : -1) 
-            } 
-      }, [sort, posts]);
-
-      return sortedPosts;   
-      
+export const useSortedPosts = ({posts, sort}) => {
+    let sortedPosts = [];
+    useEffect( () => { 
+        if (sort === 'name') {
+          sortedPosts =  [...posts].sort((a, b) =>  a[sort].localeCompare(b[sort]));
+        }
+        else {
+          sortedPosts =  [...posts].sort((a, b) =>  a[sort] > b[sort] ? -1: 1)
+        }
+      }, [sort])
+      return sortedPosts;    
 }
 

@@ -1,25 +1,16 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
 import Main from "./components/pages/Main.jsx";
 import Search from './components/pages/Search.jsx'
+import SpotifyRouter from "./components/SpotifyRouter.jsx";
 
 
 function App() {
 
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<Main/>}>
-        </Route>
-        <Route path="/search" element={<Search/>}>
-        </Route>
-  </Routes>
-  </Router>
-   
+    <SpotifyRouter props={[
+      {path:"/", page:<Main/>},
+      {path:"search", page:<Search/>}
+    ]}/>
   );
 }
 

@@ -1,18 +1,18 @@
 import React from 'react';
 import SpotifySelect from './UI/Select/SpotifySelect.jsx';
 
-const PostFilter = ({sort, setFilter}) => {
+const SortSelect = ({sort, setSort}) => {
   
     return (    
         <SpotifySelect
           value={sort}
-          onChange={selectedSort => setFilter(selectedSort)}
+          onChange={selectedSort => setSort(selectedSort)}
           defaultValue='Сортировка по'
           options={[
             {value:'popularity', name:'По популярности'},
-            {value:'title', name:'По алфавиту'}]}
+            {value:'name', name:'По алфавиту'}]}
         />
     );
 }
 
-export default PostFilter;
+export default SortSelect;

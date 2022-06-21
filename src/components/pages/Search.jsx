@@ -2,15 +2,15 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useDebouncedValue } from 'rooks';
 import Header from '../UI/Header/Header';
 import Nav from '../UI/Nav/Nav.jsx';
+import { navSearch } from '../../Constans.js';
 import Loader from '../UI/Loader/Loader.jsx';
 import SpotifyInput from '../UI/Input/SpotifyInput.jsx';
-import {clientId, clientSecret, urlSearch} from '../../js/ApiController/constants.js';
+import {clientId, clientSecret, urlSearch} from '../../js/ApiController/api_constants.js';
 import APIController from '../../js/ApiController/APIController.js';
 import ContentList from '../ContentList';
 import SpotifyLabel from '../UI/Label/SpotifyLabel.jsx';
-import {useSortedPosts} from '../hooks/useSortedPosts';
-import PostFilter from '../PostFilter';
-import {debounceTimeout} from '../../js/Constans.js'
+import SortSelect from '../SortSelect';
+import {debounceTimeout} from '../../Constans.js'
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,14 +18,11 @@ const Search = () => {
   const [debouncedSearchQuery] = useDebouncedValue(searchQuery, debounceTimeout);
   const [isLoading, setIsLoading ] = useState('false');
   const [auth, setAuth] = useState({curClientId: clientId, curClientSecret:clientSecret});
-  const [sort, setSort] = useState('popularity')
+  const [sort, setSort] = useState('');
   
-
-  const sortedResults = useSortedPosts(searchResults, sort);
-
   const apiController = new APIController(auth.curClientId, auth.curClientSecret);
 
-/** Get data if debouncedSearchQuery change*/
+  /** Get data if debouncedSearchQuery change*/
   useEffect( () => {
     async function fetchData() {
       const token = await apiController.getToken();
@@ -45,13 +42,23 @@ const Search = () => {
     setSearchQuery(event.target.value);
   };
 
+/** Sorting */
+  useEffect( () => { 
+    if (sort === 'name') {
+      const sorting =  [...searchResults].sort((a, b) =>  a[sort].localeCompare(b[sort]));
+      setSearchResults(sorting);
+    }
+    else {
+      const sorting =  [...searchResults].sort((a, b) =>  a[sort] > b[sort] ? -1: 1)
+      setSearchResults(sorting);
+    }
+  }, [sort])
+
   return (
     <div className='App'>
       <Header setAuth={setAuth}/>
       <div className='main'>
-        <Nav props={[
-          {title:'Главная', link:'/', imgSrc:'icon-home_stroke-grey.svg', alt:'icon-home'},
-          {title:'Поиск', link:'/search', imgSrc:'icon-search-white.svg', alt:'icon-search'}]} />
+        <Nav props={navSearch} />
 
         <div className='content'>
           <SpotifyLabel>Что найти для вас?</SpotifyLabel>
@@ -62,18 +69,14 @@ const Search = () => {
             onChange={changeSearchQuery}/>
           
           <label>Упорядочить </label>
-          <PostFilter
+          <SortSelect
             sort={sort}
-            setFilter={setSort}/>
+            setSort={setSort}
+            />
 
           {isLoading
             ? <Loader />
             : <ContentList title='Результаты поиска:' posts={searchResults} />} 
-
-          {
-          //<ContentList title="Отсортированные результаты поиска:" posts={sortedResults.searchResults}/>
-
-          }
         </div>
       </div>
     </div>

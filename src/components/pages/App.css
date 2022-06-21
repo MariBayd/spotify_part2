@@ -34,3 +34,9 @@ body::-webkit-scrollbar {
   background: linear-gradient( rgb(33, 33, 33), rgb(18, 18, 18));
   padding: 1.4em;
 }
+
+.textRegular {
+ font-size: small;
+ color: grey;
+ margin-bottom: 10px;
+}

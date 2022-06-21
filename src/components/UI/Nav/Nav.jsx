@@ -9,7 +9,7 @@ const Nav = ({props}) => {
     <ul className={[classes.nav, classes.navSize, classes.navBackground, classes.navPosition].join(' ')}>
 
     {props.map((item) => 
-      <li className={[classes.nav__itemPosition, classes.nav__item].join(' ')}>
+      <li key={item.title} className={[classes.nav__itemPosition, classes.nav__item].join(' ')}>
         <img className={classes.nav__img} src={item.imgSrc} alt={item.imgAlt} />
         <Link   id={Date.now()} className={classes.nav__link} to={item.link}>{item.title}</Link>
       </li>)
