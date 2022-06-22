@@ -56,7 +56,7 @@ const Search = () => {
 
   return (
     <div className='App'>
-      <Header setAuth={setAuth}/>
+      <Header logUser={setAuth}/>
       <div className='main'>
         <Nav props={navSearch} />
 

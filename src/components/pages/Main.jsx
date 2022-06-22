@@ -24,13 +24,20 @@ const Main = () => {
       await Promise.all([apiController.getData(urlNewReleases, token),
       apiController.getData(urlFeturedPlaylists, token)]);
       
-    setNewReleases(responseReleases.albums.items); 
-    setFeturedPlaylists(responseFeturedPlaylists.playlists.items);
+  setNewReleases(responseReleases.albums.items); 
+  setFeturedPlaylists(responseFeturedPlaylists.playlists.items);
   });
   
   useEffect(() => {
     fetchPosts();
   }, [])
+
+  function getConfig() {
+    return [
+      {posts: newReleases, title: "Популярные новые релизы"},
+      {posts: feturedPlaylists, title: "Популярные плейлисты"}
+      ]
+  }
   
   return (
     <div className='App'>
@@ -39,10 +46,7 @@ const Main = () => {
         <Nav props={navMain} />
 
         <div className="content">
-          <ContentLists items={[
-            {posts: newReleases, title: "Популярные новые релизы"},
-            {posts: feturedPlaylists, title: "Популярные плейлисты"}
-            ]}/>   
+          <ContentLists items={getConfig()}/>   
         </div>
 
       </div>
