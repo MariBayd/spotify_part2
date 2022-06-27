@@ -1,42 +1,43 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
-html, body, #root, .App  {
-    color: white;
-    height: 100%;
+html,
+body,
+#root,
+.App {
+  color: white;
+  height: 100%;
 }
 
 .App {
-    display: grid;
-    grid-template-rows: min-content 1fr;
+  display: grid;
+  grid-template-rows: min-content 1fr;
 }
 
 body::-webkit-scrollbar {
-    background-color: black;
+  background-color: black;
+}
 
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: rgb(90,90,90);
-    
-  }
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(90, 90, 90);
+}
 
-  .main {
-    display: grid;
-    grid-template-columns: min-content 1fr;
+.main {
+  display: grid;
+  grid-template-columns: min-content 1fr;
 }
 
 .content {
-  background: linear-gradient( rgb(33, 33, 33), rgb(18, 18, 18));
+  background: linear-gradient(rgb(33, 33, 33), rgb(18, 18, 18));
   padding: 1.4em;
 }
 
 .textRegular {
- font-size: small;
- color: grey;
- margin-bottom: 10px;
+  font-size: small;
+  color: grey;
+  margin-bottom: 10px;
 }
