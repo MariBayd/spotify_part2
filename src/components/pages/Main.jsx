@@ -21,13 +21,10 @@ const Main = () => {
     curClientSecret: clientSecret,
   });
 
-  const apiController = new APIController(
-    authData.curClientId,
-    authData.curClientSecret
-  );
+  const apiController = new APIController(authData.curClientId, authData.curClientSecret);
 
   /** Get data */
-  const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+  const [fetchPosts] = useFetching(async () => {
     const token = await apiController.getToken();
 
     const [responseReleases, responseFeturedPlaylists] = await Promise.all([
@@ -54,7 +51,7 @@ const Main = () => {
     <div className="App">
       <Header logUser={setAuthData} />
       <div className="main">
-        <Nav props={navMain} />
+        <Nav navItems={navMain} />
 
         <div className="content">
           <ContentLists items={getConfig()} />

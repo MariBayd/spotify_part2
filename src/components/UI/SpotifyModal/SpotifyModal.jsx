@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "./MyModal.module.css";
+import classes from "./SpotifyModal.module.css";
 
-const MyModal = ({ children, visible, setVisible }) => {
+const SpotifyModal = ({ children, visible, setVisible }) => {
   const rootClasses = [classes.myModal];
 
   if (visible) {
@@ -10,14 +10,11 @@ const MyModal = ({ children, visible, setVisible }) => {
 
   return (
     <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
-      <div
-        className={classes.myModalContent}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className={classes.myModalContent} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
     </div>
   );
 };
 
-export default MyModal;
+export default SpotifyModal;

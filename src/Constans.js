@@ -15,20 +15,22 @@ export const headerButtonFontSize = 35;
 /**values for nav */
 export const navMain = [
   { title: "Главная", link: "/", imgSrc: navHomeActive, alt: "icon-home" },
-  {
-    title: "Поиск",
-    link: "/search",
-    imgSrc: navSearchInactive,
-    alt: "icon-search",
-  },
+  { title: "Поиск", link: "/search", imgSrc: navSearchInactive, alt: "icon-search" },
 ];
 
 export const navSearch = [
   { title: "Главная", link: "/", imgSrc: navHomeInactive, alt: "icon-home" },
-  {
-    title: "Поиск",
-    link: "/search",
-    imgSrc: navSearchActive,
-    alt: "icon-search",
-  },
+  { title: "Поиск", link: "/search", imgSrc: navSearchActive, alt: "icon-search" },
 ];
+
+/**values for select for sorting on search page */
+export const selectSortOptions = [
+  { value: "popularity", name: "По популярности" },
+  { value: "name", name: "По алфавиту" },
+];
+
+/**value for sort by name */
+export const sortByName = "name";
+
+/**value for artist items */
+export const artistConst = "Исполнитель";

@@ -25,10 +25,7 @@ export default class APIController {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Authorization:
-            "Basic " +
-            btoa(
-              (this._clientId + ":" + this._clientSecret).toString("base64")
-            ),
+            "Basic " + btoa((this._clientId + ":" + this._clientSecret).toString("base64")),
         },
         body: "grant_type=client_credentials",
       });

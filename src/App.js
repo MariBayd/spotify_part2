@@ -6,7 +6,7 @@ import SpotifyRouter from "./components/SpotifyRouter.jsx";
 function App() {
   return (
     <SpotifyRouter
-      props={[
+      routeConfig={[
         { path: "/", page: <Main /> },
         { path: "search", page: <Search /> },
       ]}

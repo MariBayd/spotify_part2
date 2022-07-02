@@ -2,26 +2,22 @@ import React from "react";
 import classes from "./PostItem.module.css";
 import { defaultViewImg } from "../../../Constans.js";
 
-const PostItem = (props) => {
+const PostItem = ({ imgUrl, title, artist }) => {
   return (
     <div
-      className={[
-        classes.cardMusic,
-        classes.cardMusic_background,
-        classes.cardMisicPosition,
-      ].join(" ")}
+      className={[classes.cardMusic, classes.cardMusic_background, classes.cardMisicPosition].join(
+        " "
+      )}
     >
       <img
         className={classes.cardMusic__img}
-        src={props.imgUrl.length ? props.imgUrl[0].url : defaultViewImg}
+        src={imgUrl.length ? imgUrl[0].url : defaultViewImg}
       />
-      <span title={props.title} className={classes.cardMusic__playlistName}>
-        {props.title}
+      <span title={title} className={classes.cardMusic__playlistName}>
+        {title}
       </span>
       <a className={classes.cardMusic__link} href="#">
-        <span className={classes.cardMusic__playlistSinger}>
-          {props.artist}
-        </span>
+        <span className={classes.cardMusic__playlistSinger}>{artist}</span>
       </a>
     </div>
   );

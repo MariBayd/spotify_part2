@@ -1,39 +1,30 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDebouncedValue } from "rooks";
 import Header from "../UI/Header/Header";
 import Nav from "../UI/Nav/Nav.jsx";
-import { navSearch } from "../../Constans.js";
+import SpotifyLabel from "../UI/Label/SpotifyLabel.jsx";
 import Loader from "../UI/Loader/Loader.jsx";
 import SpotifyInput from "../UI/Input/SpotifyInput.jsx";
-import {
-  clientId,
-  clientSecret,
-  urlSearch,
-} from "../../js/ApiController/api_constants.js";
+import { clientId, clientSecret, urlSearch } from "../../js/ApiController/api_constants.js";
 import APIController from "../../js/ApiController/APIController.js";
 import ContentList from "../ContentList";
-import SpotifyLabel from "../UI/Label/SpotifyLabel.jsx";
 import SortSelect from "../SortSelect";
-import { debounceTimeout } from "../../Constans.js";
+import { navSearch, selectSortOptions, debounceTimeout } from "../../Constans.js";
+import { sorting } from "../../js/Helpers.js";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [debouncedSearchQuery] = useDebouncedValue(
-    searchQuery,
-    debounceTimeout
-  );
+  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, debounceTimeout);
   const [isLoading, setIsLoading] = useState("false");
   const [auth, setAuth] = useState({
     curClientId: clientId,
     curClientSecret: clientSecret,
   });
-  const [sort, setSort] = useState("");
+  const [sort, setSort] = useState("popularity");
+  let sortedRes = [];
 
-  const apiController = new APIController(
-    auth.curClientId,
-    auth.curClientSecret
-  );
+  const apiController = new APIController(auth.curClientId, auth.curClientSecret);
 
   /** Get data if debouncedSearchQuery change*/
   useEffect(() => {
@@ -59,24 +50,15 @@ const Search = () => {
 
   /** Sorting */
   useEffect(() => {
-    if (sort === "name") {
-      const sorting = [...searchResults].sort((a, b) =>
-        a[sort].localeCompare(b[sort])
-      );
-      setSearchResults(sorting);
-    } else {
-      const sorting = [...searchResults].sort((a, b) =>
-        a[sort] > b[sort] ? -1 : 1
-      );
-      setSearchResults(sorting);
-    }
+    sortedRes = sorting(searchResults, sort);
+    setSearchResults(sortedRes);
   }, [sort]);
 
   return (
     <div className="App">
       <Header logUser={setAuth} />
       <div className="main">
-        <Nav props={navSearch} />
+        <Nav navItems={navSearch} />
 
         <div className="content">
           <SpotifyLabel>Что найти для вас?</SpotifyLabel>
@@ -88,7 +70,7 @@ const Search = () => {
           />
 
           <label>Упорядочить </label>
-          <SortSelect sort={sort} setSort={setSort} />
+          <SortSelect sort={sort} setSort={setSort} options={selectSortOptions} />
 
           {isLoading ? (
             <Loader />

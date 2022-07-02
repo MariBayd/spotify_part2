@@ -1,18 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Error from "./pages/Error";
 
-const SpotifyRouter = ({ props }) => {
+const SpotifyRouter = ({ routeConfig }) => {
   return (
     <Router>
       <Routes>
-        {props.map((item) => (
-          <Route
-            key={item.path}
-            exact
-            path={item.path}
-            element={item.page}
-          ></Route>
-        ))}
+        {routeConfig.length ? (
+          routeConfig.map((item) => (
+            <Route key={item.path} path={item.path} element={item.page}></Route>
+          ))
+        ) : (
+          <Route key={"/"} path={"/"} element={<Error />}></Route>
+        )}
       </Routes>
     </Router>
   );
