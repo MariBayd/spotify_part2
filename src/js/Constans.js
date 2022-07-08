@@ -1,3 +1,6 @@
+import Main from "../components/pages/Main.jsx";
+import Search from "../components/pages/Search.jsx";
+
 /** debounce time for search input*/
 export const debounceTimeout = 1500;
 
@@ -21,6 +24,13 @@ export const navMain = [
 export const navSearch = [
   { title: "Главная", link: "/", imgSrc: navHomeInactive, alt: "icon-home" },
   { title: "Поиск", link: "/search", imgSrc: navSearchActive, alt: "icon-search" },
+];
+
+/**values for routing */
+
+export const appRoutes = [
+  { path: "/", page: <Main /> },
+  { path: "search", page: <Search /> },
 ];
 
 /**values for select for sorting on search page */

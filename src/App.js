@@ -1,17 +1,9 @@
 import React from "react";
-import Main from "./components/pages/Main.jsx";
-import Search from "./components/pages/Search.jsx";
 import SpotifyRouter from "./components/SpotifyRouter.jsx";
+import { appRoutes } from "./js/Constans.js";
 
 function App() {
-  return (
-    <SpotifyRouter
-      routeConfig={[
-        { path: "/", page: <Main /> },
-        { path: "search", page: <Search /> },
-      ]}
-    />
-  );
+  return <SpotifyRouter routeConfig={appRoutes} />;
 }
 
 export default App;

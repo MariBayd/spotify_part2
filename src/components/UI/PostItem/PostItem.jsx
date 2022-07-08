@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./PostItem.module.css";
-import { defaultViewImg } from "../../../Constans.js";
+import { defaultViewImg } from "../../../js/Constans.js";
 
 const PostItem = ({ imgUrl, title, artist }) => {
   return (

@@ -1,4 +1,11 @@
 import Logger from "../Logger.js";
+import {
+  BASE_URL,
+  URL_TOKEN,
+  CONTENT_TYPE_URLENCODED,
+  CONTENT_TYPE_JSON,
+  GRANT_TYPE_CREDENTIALS,
+} from "./api_constants.js";
 
 /** Сlass sends requests to the api spotify */
 export default class APIController {
@@ -8,7 +15,7 @@ export default class APIController {
 
   constructor(clientId, clientSecret) {
     if (!clientId || !clientSecret) {
-      Logger.logError("Некорректные значения параметров", false);
+      Logger.logError("Некорректные значения client id и/или clients secret", false);
     }
 
     this._clientId = clientId;
@@ -16,18 +23,26 @@ export default class APIController {
   }
 
   /**
+   * Get url for request
+   * @param {string} tale - request link fragment
+   */
+  getUrl(tale) {
+    return `${BASE_URL}${tale || ""}`;
+  }
+
+  /**
    * Get token
    */
   getToken = async () => {
     try {
-      const result = await fetch("https://accounts.spotify.com/api/token", {
+      const result = await fetch(URL_TOKEN, {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": CONTENT_TYPE_URLENCODED,
           Authorization:
             "Basic " + btoa((this._clientId + ":" + this._clientSecret).toString("base64")),
         },
-        body: "grant_type=client_credentials",
+        body: GRANT_TYPE_CREDENTIALS,
       });
 
       const data = await result.json();
@@ -38,7 +53,7 @@ export default class APIController {
   };
 
   /**
-   * Create wrapper for elements, insert wrapper to document
+   * Get data by request
    * @param {string} url - request url
    * @param {string} offset - item index from which the data set begins, default value 0
    * @param {string} token - token
@@ -49,8 +64,8 @@ export default class APIController {
       const result = await fetch(url + "&offset=" + offset, {
         method: "GET",
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: CONTENT_TYPE_JSON,
+          "Content-Type": CONTENT_TYPE_JSON,
           Authorization: "Bearer " + token,
         },
       });

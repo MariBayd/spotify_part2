@@ -1,7 +1,7 @@
 import React from "react";
 import PostItem from "./UI/PostItem/PostItem.jsx";
 import ContentWrapper from "./UI/ContentWrapper/ContentWrapper.jsx";
-import { artistConst } from "./../Constans";
+import { artistConst } from "../js/Constans";
 
 const ContentList = ({ posts, title }) => {
   return (

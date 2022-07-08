@@ -5,12 +5,13 @@ import Nav from "../UI/Nav/Nav.jsx";
 import SpotifyLabel from "../UI/Label/SpotifyLabel.jsx";
 import Loader from "../UI/Loader/Loader.jsx";
 import SpotifyInput from "../UI/Input/SpotifyInput.jsx";
-import { clientId, clientSecret, urlSearch } from "../../js/ApiController/api_constants.js";
+import { CLIENT_ID, CLIENT_SECRET, URL_SEARCH } from "../../js/ApiController/api_constants.js";
 import APIController from "../../js/ApiController/APIController.js";
 import ContentList from "../ContentList";
 import SortSelect from "../SortSelect";
-import { navSearch, selectSortOptions, debounceTimeout } from "../../Constans.js";
-import { sorting } from "../../js/Helpers.js";
+import { navSearch, selectSortOptions, debounceTimeout } from "../../js/Constans.js";
+import { sorting, getCeilDiv } from "../../js/Helpers.js";
+import SpotifyButton from "../UI/Button/SpotifyButton";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,8 +19,8 @@ const Search = () => {
   const [debouncedSearchQuery] = useDebouncedValue(searchQuery, debounceTimeout);
   const [isLoading, setIsLoading] = useState("false");
   const [auth, setAuth] = useState({
-    curClientId: clientId,
-    curClientSecret: clientSecret,
+    curClientId: CLIENT_ID,
+    curClientSecret: CLIENT_SECRET,
   });
   const [sort, setSort] = useState("popularity");
   let sortedRes = [];
@@ -31,7 +32,7 @@ const Search = () => {
     async function fetchData() {
       const token = await apiController.getToken();
       const response = await apiController.getData(
-        urlSearch + debouncedSearchQuery + "&type=artist",
+        apiController.getUrl(URL_SEARCH) + debouncedSearchQuery + "&type=artist",
         token
       );
       setSearchResults(response.artists.items);
@@ -50,6 +51,7 @@ const Search = () => {
 
   /** Sorting */
   useEffect(() => {
+    if (!searchResults.length) return;
     sortedRes = sorting(searchResults, sort);
     setSearchResults(sortedRes);
   }, [sort]);
@@ -68,10 +70,8 @@ const Search = () => {
             value={searchQuery}
             onChange={changeSearchQuery}
           />
-
-          <label>Упорядочить </label>
+          <label>Упорядочить{"\u00A0"}</label>
           <SortSelect sort={sort} setSort={setSort} options={selectSortOptions} />
-
           {isLoading ? (
             <Loader />
           ) : (

@@ -1,9 +1,14 @@
 .myBtn {
-    color: white;
-    font-size: 14px;
-    padding: 10px;
-    background-color: transparent;
-    background-size: 50%;
-    border-radius: 30px;
-    cursor: pointer;
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+  background-color: transparent;
+  background-size: 50%;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.myBtn:disabled {
+  background-color: grey;
+  cursor: auto;
 }

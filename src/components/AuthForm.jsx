@@ -21,8 +21,7 @@ const AuthForm = ({ logUser }) => {
   return (
     <form>
       <p className="textRegular">
-        Будьте внимательны, при неверных client id и client secret приложение не
-        будет работать.
+        Будьте внимательны, при неверных client id и client secret приложение не будет работать.
         <br />В этом случае введите данные ещё раз или перезапустите приложение.
       </p>
       <SpotifyLabel>Client id</SpotifyLabel>
@@ -30,20 +29,21 @@ const AuthForm = ({ logUser }) => {
         type="text"
         placeholder="Ввести новый client id"
         value={authData.curClientId}
-        onChange={(e) =>
-          setAuthData({ ...authData, curClientId: e.target.value })
-        }
+        onChange={(e) => setAuthData({ ...authData, curClientId: e.target.value })}
       />
       <SpotifyLabel>Client secret</SpotifyLabel>
       <SpotifyInput
         type="text"
         placeholder="Ввести новый client secret"
         value={authData.curClientSecret}
-        onChange={(e) =>
-          setAuthData({ ...authData, curClientSecret: e.target.value })
-        }
+        onChange={(e) => setAuthData({ ...authData, curClientSecret: e.target.value })}
       />
-      <SpotifyButton onClick={addNewAuthData}>Отправить данные</SpotifyButton>
+      <SpotifyButton
+        onClick={addNewAuthData}
+        disabled={!authData.curClientId || !authData.curClientSecret}
+      >
+        Отправить данные
+      </SpotifyButton>
     </form>
   );
 };
