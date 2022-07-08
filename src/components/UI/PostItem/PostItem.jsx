@@ -11,7 +11,9 @@ const PostItem = ({ imgUrl, title, artist }) => {
     >
       <img
         className={classes.cardMusic__img}
-        src={imgUrl.length ? imgUrl[0].url : defaultViewImg}
+        src={imgUrl.length
+          ? imgUrl[0].url
+          : defaultViewImg}
       />
       <span title={title} className={classes.cardMusic__playlistName}>
         {title}

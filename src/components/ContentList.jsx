@@ -6,19 +6,16 @@ import { artistConst } from "../js/Constans";
 const ContentList = ({ posts, title }) => {
   return (
     <ContentWrapper title={title}>
-      {posts.length ? (
-        posts.map((post) => (
+      {posts.length
+        ? posts.map((post) => (
           <PostItem
             key={post.id}
             title={post.name}
             artist={post.artists ? post.artists[0].name : artistConst}
             imgUrl={post.images}
             popularity={post.popularity}
-          />
-        ))
-      ) : (
-        <span>Ничего нет</span>
-      )}
+          />))
+        : <span>Ничего нет</span>}
     </ContentWrapper>
   );
 };

@@ -10,8 +10,7 @@ import APIController from "../../js/ApiController/APIController.js";
 import ContentList from "../ContentList";
 import SortSelect from "../SortSelect";
 import { navSearch, selectSortOptions, debounceTimeout } from "../../js/Constans.js";
-import { sorting, getCeilDiv } from "../../js/Helpers.js";
-import SpotifyButton from "../UI/Button/SpotifyButton";
+import { sorting} from "../../js/Helpers.js";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -72,11 +71,9 @@ const Search = () => {
           />
           <label>Упорядочить{"\u00A0"}</label>
           <SortSelect sort={sort} setSort={setSort} options={selectSortOptions} />
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <ContentList title="Результаты поиска:" posts={searchResults} />
-          )}
+          {isLoading
+            ? <Loader />
+            : <ContentList title="Результаты поиска:" posts={searchResults} />}
         </div>
       </div>
     </div>

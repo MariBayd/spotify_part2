@@ -6,13 +6,12 @@ const SpotifyRouter = ({ routeConfig }) => {
   return (
     <Router>
       <Routes>
-        {routeConfig.length ? (
-          routeConfig.map((item) => (
+        {routeConfig.length
+          ? routeConfig.map((item) => (
             <Route key={item.path} path={item.path} element={item.page}></Route>
-          ))
-        ) : (
-          <Route key={"/"} path={"/"} element={<Error />}></Route>
-        )}
+            ))
+          : <Route key={"/"} path={"/"} element={<Error />}></Route>
+        }
       </Routes>
     </Router>
   );

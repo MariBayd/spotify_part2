@@ -17,7 +17,10 @@ const Header = ({ logUser }) => {
         ...
       </SpotifyButton>
       <SpotifyModal visible={isModalVisible} setVisible={setModalVisible}>
-        {logUser ? <AuthForm logUser={logUser} /> : <div>Данные не получены</div>}
+        {logUser
+          ? <AuthForm logUser={logUser} />
+          : <div>Данные не получены</div>
+        }
       </SpotifyModal>
     </header>
   );
