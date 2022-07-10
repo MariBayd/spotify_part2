@@ -1,0 +1,47 @@
+.navWrapper {
+  height: 100%;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.navSize {
+  width: 15em;
+  height: 100%;
+}
+
+.navBackground {
+  background-color: black;
+}
+
+.navPosition {
+  padding: 1em auto auto 1em;
+}
+
+.nav__itemPosition {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 1em;
+  padding: 1em 1em 1em 1.5em;
+}
+
+.nav__item {
+  list-style: none;
+}
+
+.nav__img {
+  width: 1.5em;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: rgb(179, 179, 179);
+}
+
+.nav__link:hover {
+  color: white;
+}

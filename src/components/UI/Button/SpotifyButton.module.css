@@ -1,0 +1,14 @@
+.myBtn {
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+  background-color: transparent;
+
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.myBtn:disabled {
+  background-color: rgb(179, 179,179);
+  cursor: auto;
+}
