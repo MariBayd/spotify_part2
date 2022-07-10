@@ -1,9 +1,9 @@
 import React from "react";
-import classes from "./SpotifyButton.module.css";
+import defaultClasses from "./SpotifyButton.module.css";
 
-const SpotifyButton = ({ children, ...props }) => {
+const SpotifyButton = ({ children, classes="", ...props }) => {
   return (
-    <button {...props} className={classes.myBtn}>
+    <button {...props} className={[classes, defaultClasses.myBtn].join(" ")}>
       {children}
     </button>
   );

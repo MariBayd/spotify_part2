@@ -44,3 +44,6 @@ export const sortByName = "name";
 
 /**value for artist items */
 export const artistConst = "Исполнитель";
+
+/**value for artist items */
+export const limitItems = 20;
