@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "../UI/Header/Header.jsx";
 import {
-  URL_FETURED_PLAYLISTS,
   URL_NEW_RELEASES,
   CLIENT_ID,
   CLIENT_SECRET,
@@ -11,7 +10,7 @@ import APIController from "../../js/ApiController/APIController.js";
 import ContentList from "../ContentList";
 import { useFetching } from "../hooks/useFetching.js";
 import Nav from "../UI/Nav/Nav.jsx";
-import { navMain, limitItems } from "../../js/Constans.js";
+import { NAV_MAIN, LIMIT_ITEMS } from "../../js/Constans.js";
 import PageSwitch from "../UI/PageSwitch/PageSwitch";
 
 const Main = () => {
@@ -22,7 +21,11 @@ const Main = () => {
     curClientSecret: CLIENT_SECRET,
   });
   /**state for page switching */
-  const [pageSwitchConfig, setPageSwitchConfig] = useState({ offset: 0, totalItems: 0 });
+  const [pageSwitchConfig, setPageSwitchConfig] = useState({
+    offset: 0,
+    totalItems: 0,
+    limit: LIMIT_ITEMS,
+  });
 
   const apiController = new APIController(authData.curClientId, authData.curClientSecret);
 
@@ -32,13 +35,14 @@ const Main = () => {
 
     const responseReleases = await apiController.getData(
       apiController.getUrl(URL_NEW_RELEASES),
-      token, pageSwitchConfig.offset
+      token, pageSwitchConfig.limit, pageSwitchConfig.offset, 
     );
 
     setNewReleases(responseReleases.albums.items);
     setPageSwitchConfig(
       { ...pageSwitchConfig,
-        totalItems: responseReleases.albums.total
+        totalItems: responseReleases.albums.total,
+        limit: responseReleases.albums.limit
       });
   });
 
@@ -50,14 +54,14 @@ const Main = () => {
     <div className="App">
       <Header logUser={setAuthData} />
       <div className="main">
-        <Nav navItems={navMain} />
+        <Nav navItems={NAV_MAIN} />
 
         <div className="content">
           <ContentList posts={newReleases} title="Популярные новые релизы" />
           <PageSwitch
             offset={pageSwitchConfig.offset}
             setOffset={setPageSwitchConfig}
-            limit={limitItems}
+            limit={pageSwitchConfig.limit}
             itemsLength={newReleases.length}
             totalItems={pageSwitchConfig.totalItems}
           />

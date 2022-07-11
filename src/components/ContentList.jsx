@@ -1,7 +1,7 @@
 import React from "react";
 import PostItem from "./UI/PostItem/PostItem.jsx";
 import ContentWrapper from "./UI/ContentWrapper/ContentWrapper.jsx";
-import { artistConst } from "../js/Constans";
+import { ARTIST_CONST } from "../js/Constans";
 
 const ContentList = ({ posts, title }) => {
   return (
@@ -11,7 +11,7 @@ const ContentList = ({ posts, title }) => {
           <PostItem
             key={post.id}
             title={post.name}
-            artist={post.artists ? post.artists[0].name : artistConst}
+            artist={post.artists ? post.artists[0].name : ARTIST_CONST}
             imgUrl={post.images}
             popularity={post.popularity}
           />))

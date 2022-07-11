@@ -6,6 +6,7 @@ import {
   CONTENT_TYPE_JSON,
   GRANT_TYPE_CREDENTIALS,
 } from "./api_constants.js";
+import { LIMIT_ITEMS } from "../Constans.js";
 
 /** Сlass sends requests to the api spotify */
 export default class APIController {
@@ -59,9 +60,9 @@ export default class APIController {
    * @param {string} token - token
    */
 
-  getData = async (url, token, offset = 0) => {
+  getData = async (url, token, limit = LIMIT_ITEMS, offset = 0) => {
     try {
-      const result = await fetch(url + "&offset=" + offset, {
+      const result = await fetch(url + "&limit=" + limit + "&offset=" + offset, {
         method: "GET",
         headers: {
           Accept: CONTENT_TYPE_JSON,

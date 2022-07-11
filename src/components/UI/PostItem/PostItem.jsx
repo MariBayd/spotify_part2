@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./PostItem.module.css";
-import { defaultViewImg } from "../../../js/Constans.js";
+import { DEFAULT_VIEW_IMG } from "../../../js/Constans.js";
 
 const PostItem = ({ imgUrl, title, artist }) => {
   return (
@@ -13,7 +13,7 @@ const PostItem = ({ imgUrl, title, artist }) => {
         className={classes.cardMusic__img}
         src={imgUrl.length
           ? imgUrl[0].url
-          : defaultViewImg}
+          : DEFAULT_VIEW_IMG }
       />
       <span title={title} className={classes.cardMusic__playlistName}>
         {title}

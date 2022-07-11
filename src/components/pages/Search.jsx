@@ -9,8 +9,8 @@ import { CLIENT_ID, CLIENT_SECRET, URL_SEARCH } from "../../js/ApiController/api
 import APIController from "../../js/ApiController/APIController.js";
 import ContentList from "../ContentList";
 import SortSelect from "../SortSelect";
-import { navSearch, selectSortOptions, debounceTimeout, limitItems } from "../../js/Constans.js";
-import { sorting} from "../../js/Helpers.js";
+import { NAV_SEARCH, SELECT_SORT_OPTIONS, DEBOUNCE_TIMEOUT, LIMIT_ITEMS } from "../../js/Constans.js";
+import { sortingNumber, sortingString} from "../../js/Helpers.js";
 import PageSwitch from "../UI/PageSwitch/PageSwitch";
 
 const Search = () => {
@@ -18,7 +18,7 @@ const Search = () => {
   /**states for search */
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, debounceTimeout);
+  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, DEBOUNCE_TIMEOUT);
 
   /**state for loading indicator */
   const [isLoading, setIsLoading] = useState("false");
@@ -37,7 +37,7 @@ const Search = () => {
 
   /**state for page switching */
   const [pageSwitchConfig, setPageSwitchConfig] = useState(
-    { offset: 0, totalItems: 0 });
+    { offset: 0, totalItems: 0, limit: LIMIT_ITEMS, });
 
   /** Get data if debouncedSearchQuery change*/
   useEffect(() => {
@@ -46,11 +46,16 @@ const Search = () => {
       const response = await apiController.getData(
         apiController.getUrl(URL_SEARCH) + debouncedSearchQuery + "&type=artist",
         token,
+        pageSwitchConfig.limit,
         pageSwitchConfig.offset
       );
       setSearchResults(response.artists.items);
-      setPageSwitchConfig({ ...pageSwitchConfig, totalItems: response.artists.total });
+      setPageSwitchConfig({
+        ...pageSwitchConfig,
+        totalItems: response.artists.total,
+        limit: response.artists.limit });
     }
+
     if (debouncedSearchQuery) {
       fetchData();
     }
@@ -67,7 +72,12 @@ const Search = () => {
   /** Sorting */
   useEffect(() => {
     if (!searchResults.length) return;
-    sortedRes = sorting(searchResults, sort);
+    if (typeof searchResults[0][sort] === "string") {
+      sortedRes = sortingString(searchResults, sort);
+    }
+    if (typeof searchResults[0][sort] === "number") {
+      sortedRes = sortingNumber(searchResults, sort);
+    }
     setSearchResults(sortedRes);
   }, [sort]);
 
@@ -75,7 +85,7 @@ const Search = () => {
     <div className="App">
       <Header logUser={setAuth} />
       <div className="main">
-        <Nav navItems={navSearch} />
+        <Nav navItems={NAV_SEARCH} />
 
         <div className="content">
           <SpotifyLabel>Что найти для вас?</SpotifyLabel>
@@ -87,7 +97,7 @@ const Search = () => {
           />
 
           <label>Упорядочить{"\u00A0"}</label>
-          <SortSelect sort={sort} setSort={setSort} options={selectSortOptions} />
+          <SortSelect sort={sort} setSort={setSort} options={SELECT_SORT_OPTIONS} />
 
           {isLoading
             ? <Loader />
@@ -96,7 +106,7 @@ const Search = () => {
 
           <PageSwitch
             offset={pageSwitchConfig.offset}
-            limit={limitItems}
+            limit={pageSwitchConfig.limit}
             itemsLength={searchResults.length}
             totalItems={pageSwitchConfig.totalItems}
             setOffset={setPageSwitchConfig}
